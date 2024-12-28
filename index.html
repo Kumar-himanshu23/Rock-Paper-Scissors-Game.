@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock-Paper-Scissor Game.</title>
+    <style>
+        *{
+    margin: 0px;
+    padding: 0px;
+    font-family: cursive,sans-serif;
+    text-align:center ;
+}
+body{
+    background-color: #6a5bf16b ;
+}
+header{
+    background-color:#040405 ;
+    color: white;
+    height: 5rem;
+    line-height: 5rem;
+}
+.choices{
+    height: 12rem;
+    display: flex;
+    justify-content: center;
+    line-height: 3rem;
+    gap: 2rem;
+    padding-top: 3rem;
+   
+}
+.choice{
+    height: 120px;
+    width: 100px;
+    background-color: #f0777796;
+    box-shadow: 10px 10px 20px black ;
+    border-radius: 1.5rem
+   
+}
+.choice:hover{
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.7)   
+}
+.score-board{
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    margin-top:1.5rem;
+}
+.score{
+    font-weight: 700;
+    width: 2rem;
+    font-size: 1rem;
+}
+#user-score,#comp-score{
+    font-size: 3rem;
+}
+.msg-container{
+    margin-top: 2rem;
+}
+#msg{
+    background-color: #1e168bc5;
+    height: 5rem;
+    font-size: 2rem;
+    display: inline;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Rock-Paper-Scissor.</h1>
+    </header>
+    <main>
+      <div class="choices">
+        <div class="choice" id="Rock">
+          <h2>Rock</h2>
+          <h1>🪨</h1>
+        </div>
+        <div class="choice" id="Paper">
+          <h2>paper</h2>
+          <h1>📰</h1>
+        </div>
+        <div  class="choice"id="Scissors">
+          <h2>scissor</h2>
+          <h1>✂️</h1>
+        </div>
+      </div>
+      <div class="score-board">
+        <div class="score">
+            <p id="user-score">0</p>
+            <p>You</p>
+        </div>
+        <div class="score">
+            <p id="comp-score">0</p>
+            <p>Computer</p>
+        </div>
+      </div>
+      <div class="msg-container">
+        <p id="msg">Play Your Move.</p>
+      </div>
+    </main>
+    <script>
+        let userScore = 0;
+let comScore = 0;
+const choices = document.querySelectorAll(".choice");
+const userscorep=document.querySelector("#user-score");
+const computercorep=document.querySelector("#comp-score");
+const msg=document.querySelector("#msg");
+const gencompchoice=()=>{
+    const options=["Rock","Paper","Scissors"];
+     const randomIdx=Math.floor(Math.random() * 3);
+     return options[randomIdx];
+}
+
+const drawgame=()=>{
+    msg.innerText="Game is over.Play Again";
+    msg.style.backgroundColor="#dbdf06ec";
+}
+const showWinner=(userwin,Userchoice,comchoice)=>{
+    if(userwin)
+    {  
+       userScore++;
+       userscorep.innerText=userScore;
+        msg.innerText=`You win! your's ${Userchoice} beats ${comchoice}`;
+        msg.style.backgroundColor="green";
+    }
+    else{
+        comScore++;
+        computercorep.innerText=comScore;
+        msg.innerText=`You Lose! ${comchoice} beats you'r ${Userchoice}`;
+        msg.style.backgroundColor="red";
+    }
+}
+const playgame = (Userchoice) => {
+    const comchoice=gencompchoice();
+    if(Userchoice === comchoice){
+        drawgame();
+    }
+    else{
+        let userwin=true;
+        if(Userchoice==="Rock")
+        {
+           userwin=comchoice==="paper"?false:true ;
+        }
+        else if(Userchoice==="Paper")
+        {
+            userwin=comchoice==="Scissor"?false:true;
+        }
+        else
+        {
+            userwin=comchoice==="Rock"?false:true;
+
+        }
+        showWinner(userwin,Userchoice,comchoice);
+    }
+};
+
+choices.forEach((choice) => {
+  choice.addEventListener("click", () => {
+    const Userchoice = choice.getAttribute("id");
+    playgame(Userchoice);
+  });
+});
+
+    </script>
+  </body>
+</html>
