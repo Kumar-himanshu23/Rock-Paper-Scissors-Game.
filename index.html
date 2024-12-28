@@ -125,13 +125,13 @@ const showWinner=(userwin,Userchoice,comchoice)=>{
     {  
        userScore++;
        userscorep.innerText=userScore;
-        msg.innerText=`You win! your's ${Userchoice} beats ${comchoice}`;
+        msg.innerText=`You win! ${Userchoice} beats ${comchoice}`;
         msg.style.backgroundColor="green";
     }
     else{
         comScore++;
         computercorep.innerText=comScore;
-        msg.innerText=`You Lose! ${comchoice} beats you'r ${Userchoice}`;
+        msg.innerText=`You Lose! ${comchoice} beats ${Userchoice}`;
         msg.style.backgroundColor="red";
     }
 }
